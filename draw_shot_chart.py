@@ -2,12 +2,13 @@ import matplotlib.pyplot as plt
 from draw_court import draw_court
 from get_game_shots import get_game_shots
 
-def draw_shot_chart(gameid):
+def draw_shot_chart(gameid, team = 'home'):
     shots = get_game_shots(gameid)
     
     ax = draw_court()
     
-    home_shots = shots.loc[shots['Home/Away'] == 'home']
+    
+    home_shots = shots.loc[shots['Home/Away'] == team]
     home_makes = home_shots.loc[home_shots['Scoring Play'] == True]
     home_misses = home_shots.loc[home_shots['Scoring Play'] == False]
     
