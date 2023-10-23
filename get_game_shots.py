@@ -1,10 +1,15 @@
 import requests
 import json
+import numpy as np
 import pandas as pd
+from constants import USER_AGENTS, REFERRERS
 
 def get_game_shots(gameid):
+    
+    headers = {'User-Agent': np.random.choice(USER_AGENTS),
+               'Referer': np.random.choice(REFERRERS)}
     url = "https://www.espn.com/mens-college-basketball/playbyplay?gameId=" + str(gameid)
-    r = requests.get(url)
+    r = requests.get(url, headers=headers)
     
     text = str(r.content)
     text = text.split('shtChrt')
